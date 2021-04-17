@@ -1,18 +1,17 @@
 const { Model } = require("objection");
 
-class UserModel extends Model {
+class CustomerModel extends Model {
   static get tableName() {
-    return "User";
+    return "Customer";
   }
 
   static get idColumn() {
     return ["id"];
   }
-
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["full_name", "email", "mobileNumber", "role", "password"],
+      required: ["customerName", "customerStreet", "customerCity", "customerPhone", "customerEmail"],
 
       // Properties defined as objects or arrays are
       // automatically converted to JSON strings when
@@ -23,20 +22,14 @@ class UserModel extends Model {
 
       properties: {
         id: { type: "string" },
-        full_name: { type: "string" },
-        email: { type: "string", index: { unique: true } },
-        password: {
-          type: "string",
-        },
-        mobileNumber: { type: "string" },
-        role: {
-          type: "string",
-          enum: ["customer", "banker"],
-          default: "customer",
-        },
+        customerPhone: { type: "string" },
+        customerEmail: { type: "string" },
+        customerName: { type: "string" },
+        customerStreet: { type: "string" },
+        customerCity: { type: "string" },
       },
     };
   }
 }
 
-module.exports = UserModel;
+module.exports = CustomerModel;

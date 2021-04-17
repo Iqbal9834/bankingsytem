@@ -1,18 +1,30 @@
 const { Model } = require("objection");
-
-class UserModel extends Model {
+const { AccountModel } = require("./account")
+const { CustomerModel } = require("./customer")
+class TransactionModel extends Model {
   static get tableName() {
-    return "User";
+    return "Transaction";
   }
 
   static get idColumn() {
     return ["id"];
   }
 
+  static relationMappings = {
+    accountId: {
+      relation: Model.HasManyRelation,
+      modelClass: AccountModel,
+      join: {
+        from: 'Transaction.id',
+        to: 'Account.id'
+      },
+    }
+  };
+
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["full_name", "email", "mobileNumber", "role", "password"],
+      required: ["amount", "date", "type"],
 
       // Properties defined as objects or arrays are
       // automatically converted to JSON strings when
@@ -23,20 +35,15 @@ class UserModel extends Model {
 
       properties: {
         id: { type: "string" },
-        full_name: { type: "string" },
-        email: { type: "string", index: { unique: true } },
-        password: {
+        date: { type: "date"},
+        type: {
           type: "string",
+          enum: ["withdrawal", "deposit"],
         },
-        mobileNumber: { type: "string" },
-        role: {
-          type: "string",
-          enum: ["customer", "banker"],
-          default: "customer",
-        },
+        amount: { type: "number"}
       },
     };
   }
 }
 
-module.exports = UserModel;
+module.exports = TransactionModel;

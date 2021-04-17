@@ -4,10 +4,10 @@ module.exports = {
   development: {
     client: "mysql",
     connection: {
-      host: "remotemysql.com",
-      user: "CNexnTPRAB",
-      password: "NtMcHHlfNN",
-      database: "CNexnTPRAB",
+      host: "localhost",
+      user: "root",
+      password: "new_password",
+      database: "bankingsystem",
     },
     migrations: {
       directory: __dirname + "/knex/migrations",

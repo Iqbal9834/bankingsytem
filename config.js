@@ -6,8 +6,8 @@ module.exports = {
   user: process.env.USER,
   port: process.env.PORT,
   db_name: process.env.DBNAME,
-//   secret: process.env.SECRET,
-//   expires: process.env.EXPIRE,
+  secret: process.env.SECRET,
+  expires: process.env.EXPIRE,
   password: process.env.PASSWORD,
   port: process.env.PORT
 
